@@ -1,0 +1,24 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       unnamed constraint on [dbo].[fact_manufacture]
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [dbo].[fact_return_serial] (Foreign Key)
+       [dbo].[fact_sales_manufacture] (Foreign Key)
+       unnamed constraint on [dbo].[fact_manufacture] (Primary Key)
+     Create
+       [dbo].[dim_serial] (Table)
+       [dbo].[fact_return_serial] (Foreign Key)
+       [dbo].[fact_sales_manufacture] (Foreign Key)
+       [dbo].[fact_manufacture_serial] (Foreign Key)
+     Alter
+       [rs].[prc_r_001] (Procedure)
+
+** Supporting actions

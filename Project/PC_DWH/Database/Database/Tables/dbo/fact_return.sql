@@ -9,7 +9,7 @@
 	gross_sales money not null,
     CONSTRAINT [fact_returns_model] FOREIGN KEY (model_id) REFERENCES dbo.dim_model(model_id),
 	CONSTRAINT [fact_return_customer] FOREIGN KEY (customer_id) REFERENCES dbo.dim_customer(customer_id),
-	CONSTRAINT [fact_return_serial] FOREIGN KEY (serial_id) REFERENCES dbo.fact_manufacture(serial_id)
+	CONSTRAINT [fact_return_serial] FOREIGN KEY (serial_id) REFERENCES dbo.dim_serial(serial_id)
 ) on ps_date_year(day_id)
 go
 create index ix_fact_return_serial on [dbo].[fact_return] 

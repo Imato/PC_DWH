@@ -534,31 +534,6 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 
 GO
-PRINT N'Creating [dbo].[fact_manufacture]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-CREATE TABLE [dbo].[fact_manufacture] (
-    [serial_id]   INT      NOT NULL,
-    [day_id]      DATE     NOT NULL,
-    [model_id]    SMALLINT NOT NULL,
-    [purchase_id] INT      NOT NULL,
-    [hardware_id] INT      NOT NULL,
-    [supplier_id] SMALLINT NOT NULL,
-    [cost]        MONEY    NOT NULL,
-    PRIMARY KEY CLUSTERED ([serial_id] ASC)
-) ON [ps_id] ([serial_id]);
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
 PRINT N'Creating [dbo].[dim_customer]...';
 
 
@@ -732,6 +707,49 @@ CREATE NONCLUSTERED INDEX [ix_hardware_supplier_id]
 
 
 GO
+PRINT N'Creating [dbo].[dim_serial]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+CREATE TABLE [dbo].[dim_serial] (
+    [serial_id] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([serial_id] ASC)
+);
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+PRINT N'Creating [dbo].[fact_manufacture]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+CREATE TABLE [dbo].[fact_manufacture] (
+    [serial_id]   INT      NOT NULL,
+    [day_id]      DATE     NOT NULL,
+    [model_id]    SMALLINT NOT NULL,
+    [purchase_id] INT      NOT NULL,
+    [hardware_id] INT      NOT NULL,
+    [supplier_id] SMALLINT NOT NULL,
+    [cost]        MONEY    NOT NULL
+) ON [ps_id] ([serial_id]);
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
 PRINT N'Creating [dbo].[fact_sales]...';
 
 
@@ -830,6 +848,24 @@ ALTER TABLE [dbo].[fact_purchase]
 
 
 GO
+PRINT N'Creating [dbo].[fk_hardware_supplier]...';
+
+
+GO
+ALTER TABLE [dbo].[dim_hardware]
+    ADD CONSTRAINT [fk_hardware_supplier] FOREIGN KEY ([supplier_id]) REFERENCES [dbo].[dim_supplier] ([supplier_id]);
+
+
+GO
+PRINT N'Creating [dbo].[fk_dim_hardware_type]...';
+
+
+GO
+ALTER TABLE [dbo].[dim_hardware]
+    ADD CONSTRAINT [fk_dim_hardware_type] FOREIGN KEY ([hardware_type_id]) REFERENCES [dbo].[dim_hardware_type] ([hardware_type_id]);
+
+
+GO
 PRINT N'Creating [dbo].[fact_manufacture_hardware]...';
 
 
@@ -866,21 +902,12 @@ ALTER TABLE [dbo].[fact_manufacture]
 
 
 GO
-PRINT N'Creating [dbo].[fk_hardware_supplier]...';
+PRINT N'Creating [dbo].[fact_manufacture_serial]...';
 
 
 GO
-ALTER TABLE [dbo].[dim_hardware]
-    ADD CONSTRAINT [fk_hardware_supplier] FOREIGN KEY ([supplier_id]) REFERENCES [dbo].[dim_supplier] ([supplier_id]);
-
-
-GO
-PRINT N'Creating [dbo].[fk_dim_hardware_type]...';
-
-
-GO
-ALTER TABLE [dbo].[dim_hardware]
-    ADD CONSTRAINT [fk_dim_hardware_type] FOREIGN KEY ([hardware_type_id]) REFERENCES [dbo].[dim_hardware_type] ([hardware_type_id]);
+ALTER TABLE [dbo].[fact_manufacture]
+    ADD CONSTRAINT [fact_manufacture_serial] FOREIGN KEY ([serial_id]) REFERENCES [dbo].[dim_serial] ([serial_id]);
 
 
 GO
@@ -907,7 +934,7 @@ PRINT N'Creating [dbo].[fact_sales_manufacture]...';
 
 GO
 ALTER TABLE [dbo].[fact_sales]
-    ADD CONSTRAINT [fact_sales_manufacture] FOREIGN KEY ([serial_id]) REFERENCES [dbo].[fact_manufacture] ([serial_id]);
+    ADD CONSTRAINT [fact_sales_manufacture] FOREIGN KEY ([serial_id]) REFERENCES [dbo].[dim_serial] ([serial_id]);
 
 
 GO
@@ -934,7 +961,7 @@ PRINT N'Creating [dbo].[fact_return_serial]...';
 
 GO
 ALTER TABLE [dbo].[fact_return]
-    ADD CONSTRAINT [fact_return_serial] FOREIGN KEY ([serial_id]) REFERENCES [dbo].[fact_manufacture] ([serial_id]);
+    ADD CONSTRAINT [fact_return_serial] FOREIGN KEY ([serial_id]) REFERENCES [dbo].[dim_serial] ([serial_id]);
 
 
 GO
@@ -1097,7 +1124,7 @@ order by m.hardware_id
 --- использование комплектующих по группам и поставщикам в днях и прибыль
 select h.hardware_type_name, h.supplier_name,
 	avg(u.life_time) as life_time,
-	avg(u.gross_sales - u.cost) as profit
+	sum(u.gross_sales - u.cost) as profit
 from #hw_usage u
 join [rs].[dim_hardware] h on h.hardware_id=u.hardware_id
 group by h.hardware_type_name, h.supplier_name
@@ -1105,6 +1132,10 @@ order by h.hardware_type_name, h.supplier_name
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
+
+GO
+BACKUP DATABASE [pc_dwh] TO  DISK = N'C:\Data\SQL\Projects\PC_DWH\DB\pc_dwh.bak' WITH NOFORMAT, INIT,  NAME = N'pc_dwh-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10
+GO
 
 GO
 DECLARE @VarDecimalSupported AS BIT;

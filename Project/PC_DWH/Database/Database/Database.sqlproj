@@ -137,11 +137,12 @@
     <Build Include="Storage\file_fact_id.sql" />
     <Build Include="Storage\fg_fact_id.sql" />
     <Build Include="Storage\pf_id.sql" />
-    <Build Include="Storage\ps_id_1.sql" />
     <Build Include="Views\rs\fact_manufacture.sql" />
     <Build Include="Views\rs\fact_return.sql" />
     <Build Include="Views\rs\fact_sales.sql" />
     <Build Include="Procedures\rs\prc_r_001.sql" />
+    <Build Include="Storage\ps_id.sql" />
+    <Build Include="Tables\dbo\dim_serial.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\dbo\fact_manufacture.sql" />
@@ -153,6 +154,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Database.publish.xml" />
-    <None Include="Storage\ps_id.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>
