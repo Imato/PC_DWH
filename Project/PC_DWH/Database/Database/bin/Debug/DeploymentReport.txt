@@ -1,0 +1,49 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [fact_2011] (Filegroup)
+       [fact_2012] (Filegroup)
+       [fact_2013] (Filegroup)
+       [fact_2014] (Filegroup)
+       [fact_2015] (Filegroup)
+       [rs] (Schema)
+       [pf_date_year] (Partition Function)
+       [ps_date_year] (Partition Scheme)
+       [dbo].[dim_hardware] (Table)
+       [dbo].[dim_hardware].[ix_hardware_barcode] (Index)
+       [dbo].[dim_hardware].[ix_hardware_type_id] (Index)
+       [dbo].[dim_hardware].[ix_hardware_supplier_id] (Index)
+       [dbo].[dim_hardware_type] (Table)
+       [dbo].[dim_model] (Table)
+       [dbo].[dim_model].[ix_dim_model_barcode] (Index)
+       [dbo].[dim_part] (Table)
+       [dbo].[dim_sales_type] (Table)
+       [dbo].[dim_supplier] (Table)
+       [dbo].[fact_manufacture] (Table)
+       [dbo].[fact_purchase] (Table)
+       [dbo].[fact_sales] (Table)
+       [dbo].[fk_hardware_supplier] (Foreign Key)
+       [dbo].[fk_dim_hardware_type] (Foreign Key)
+       [dbo].[fact_manufacture_hardware] (Foreign Key)
+       [dbo].[fact_manufacture_supplier] (Foreign Key)
+       [dbo].[fk_fact_manufacture_model] (Foreign Key)
+       [dbo].[fk_fact_manufacture_part] (Foreign Key)
+       [dbo].[fact_purchase_cost_hardware] (Foreign Key)
+       [dbo].[fact_purchase_cost_supplier] (Foreign Key)
+       [dbo].[fact_sales_model] (Foreign Key)
+       [dbo].[fact_sales_part] (Foreign Key)
+       [dbo].[fact_sales_sales_type] (Foreign Key)
+       [dbo].[fact_manufacture_cost] (Check Constraint)
+       [dbo].[ck_fact_purchase_cost] (Check Constraint)
+       [dbo].[fact_sales_cost] (Check Constraint)
+
+** Supporting actions

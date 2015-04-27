@@ -1,0 +1,45 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[fact_manufacture]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [fact_id_100000] (Filegroup)
+       [fact_id_200000] (Filegroup)
+       [fact_id_300000] (Filegroup)
+       [fact_id_400000] (Filegroup)
+       [fact_id_500000] (Filegroup)
+       [fact_id_100000] (File)
+       [fact_id_200000] (File)
+       [fact_id_300000] (File)
+       [fact_id_400000] (File)
+       [fact_id_500000] (File)
+       [pf_id] (Partition Function)
+       [ps_id] (Partition Scheme)
+       [dbo].[fact_return_serial] (Foreign Key)
+       [dbo].[fact_sales_manufacture] (Foreign Key)
+     Drop
+       [dbo].[fact_manufacture_serial] (Foreign Key)
+       [dbo].[fact_return_serial] (Foreign Key)
+       [dbo].[fact_sales_serial] (Foreign Key)
+     Table rebuild
+       [dbo].[fact_manufacture] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[fact_manufacture_hardware] (Foreign Key)
+       [dbo].[fact_manufacture_supplier] (Foreign Key)
+       [dbo].[fk_fact_manufacture_model] (Foreign Key)
+       [dbo].[fact_manufacture_purchase] (Foreign Key)
+     Create
+       [dbo].[fact_manufacture_hardware] (Foreign Key)
+       [dbo].[fact_manufacture_supplier] (Foreign Key)
+       [dbo].[fk_fact_manufacture_model] (Foreign Key)
+       [dbo].[fact_manufacture_purchase] (Foreign Key)
+       [dbo].[fact_manufacture_cost] (Check Constraint)

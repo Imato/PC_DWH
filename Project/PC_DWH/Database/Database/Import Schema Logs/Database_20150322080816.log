@@ -1,0 +1,72 @@
+22.03.2015 13:08:16	This log contains information about the import schema operation into project 'Database' on computer 'SQL_2014' by user 'Imato'.
+22.03.2015 13:08:16	Import of database schema has started.
+22.03.2015 13:08:27	Gathering database options
+22.03.2015 13:08:27	Gathering users
+22.03.2015 13:08:27	Gathering roles
+22.03.2015 13:08:27	Gathering application roles
+22.03.2015 13:08:27	Gathering role memberships
+22.03.2015 13:08:27	Gathering filegroups
+22.03.2015 13:08:27	Gathering full-text catalogs
+22.03.2015 13:08:27	Gathering assemblies
+22.03.2015 13:08:27	Gathering certificates
+22.03.2015 13:08:27	Gathering asymmetric keys
+22.03.2015 13:08:27	Gathering symmetric keys
+22.03.2015 13:08:27	Gathering encrypted symmetric keys
+22.03.2015 13:08:27	Gathering schemas
+22.03.2015 13:08:27	Gathering XML schema collections
+22.03.2015 13:08:27	Gathering user-defined data types
+22.03.2015 13:08:27	Gathering user-defined types
+22.03.2015 13:08:27	Gathering table types
+22.03.2015 13:08:27	Gathering unique keys for table types
+22.03.2015 13:08:27	Gathering primary keys for table types
+22.03.2015 13:08:27	Gathering indexes for table types
+22.03.2015 13:08:27	Gathering check constraints for table types
+22.03.2015 13:08:27	Gathering default constraints for table types
+22.03.2015 13:08:27	Gathering partition functions
+22.03.2015 13:08:27	Gathering partition schemes
+22.03.2015 13:08:27	Gathering functions
+22.03.2015 13:08:27	Gathering encrypted functions
+22.03.2015 13:08:27	Gathering aggregates
+22.03.2015 13:08:27	Gathering procedures
+22.03.2015 13:08:27	Gathering encrypted procedures
+22.03.2015 13:08:28	Gathering tables
+22.03.2015 13:08:28	Gathering primary keys
+22.03.2015 13:08:28	Gathering unique constraints
+22.03.2015 13:08:28	Gathering foreign keys
+22.03.2015 13:08:28	Gathering default constraints
+22.03.2015 13:08:28	Gathering check constraints
+22.03.2015 13:08:28	Gathering views
+22.03.2015 13:08:28	Gathering encrypted views
+22.03.2015 13:08:28	Gathering indexes
+22.03.2015 13:08:28	Gathering statistics
+22.03.2015 13:08:28	Gathering full-text index stoplists
+22.03.2015 13:08:28	Gathering search property lists
+22.03.2015 13:08:28	Gathering search properties
+22.03.2015 13:08:28	Gathering full-text indexes
+22.03.2015 13:08:28	Gathering column store indexes
+22.03.2015 13:08:28	Gathering spatial indexes
+22.03.2015 13:08:28	Gathering XML indexes
+22.03.2015 13:08:28	Gathering Selective XML indexes
+22.03.2015 13:08:28	Gathering encrypted triggers
+22.03.2015 13:08:28	Gathering triggers
+22.03.2015 13:08:28	Gathering encrypted and clr ddl triggers
+22.03.2015 13:08:28	Gathering ddl triggers
+22.03.2015 13:08:28	Gathering synonyms
+22.03.2015 13:08:28	Gathering defaults
+22.03.2015 13:08:28	Gathering data constraint uddt bindings
+22.03.2015 13:08:28	Gathering rules
+22.03.2015 13:08:28	Gathering data constraint uddt bindings
+22.03.2015 13:08:28	Gathering message types
+22.03.2015 13:08:28	Gathering queues
+22.03.2015 13:08:28	Gathering contracts
+22.03.2015 13:08:28	Gathering services
+22.03.2015 13:08:28	Gathering event notifications
+22.03.2015 13:08:28	Gathering remote service bindings
+22.03.2015 13:08:28	Gathering broker priorities
+22.03.2015 13:08:28	Gathering signatures
+22.03.2015 13:08:28	Gathering data compression options
+22.03.2015 13:08:28	Gathering sequence types
+22.03.2015 13:08:28	Gathering extended properties
+22.03.2015 13:08:29	Finished importing database.
+22.03.2015 13:08:29	A summary of the import was saved to the following location: C:\Data\SQL\Projects\PC_DWH\Project\PC_DWH\Database\Database\Import Schema Logs\Database_20150322080816.log
+22.03.2015 13:08:29	Click Finish to continue...

@@ -1,0 +1,39 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[dim_serial] (Table)
+       [dbo].[fact_manufacture] (Table)
+       [dbo].[fact_purchase] (Table)
+       [dbo].[fact_return] (Table)
+       [dbo].[fact_sales] (Table)
+       [dbo].[fact_manufacture_hardware] (Foreign Key)
+       [dbo].[fact_manufacture_supplier] (Foreign Key)
+       [dbo].[fk_fact_manufacture_model] (Foreign Key)
+       [dbo].[fact_manufacture_purchase] (Foreign Key)
+       [dbo].[fact_manufacture_serial] (Foreign Key)
+       [dbo].[fact_purchase_hardware] (Foreign Key)
+       [dbo].[fact_purchase_supplier] (Foreign Key)
+       [dbo].[fact_purchase_purchase] (Foreign Key)
+       [dbo].[fact_returns_model] (Foreign Key)
+       [dbo].[fact_return_customer] (Foreign Key)
+       [dbo].[fact_return_serial] (Foreign Key)
+       [dbo].[fact_sales_model] (Foreign Key)
+       [dbo].[fact_sales_customer] (Foreign Key)
+       [dbo].[fact_sales_serial] (Foreign Key)
+       [dbo].[fk_dim_hardware_type] (Foreign Key)
+       [dbo].[fk_hardware_supplier] (Foreign Key)
+       [dbo].[fact_manufacture_cost] (Check Constraint)
+       [dbo].[ck_fact_purchase_cost] (Check Constraint)
+       [dbo].[fact_sales_cost] (Check Constraint)
+       [rs].[dim_hardware] (View)
+
+** Supporting actions

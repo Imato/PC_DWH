@@ -1,0 +1,22 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [dbo].[fact_purchase_cost_hardware] (Foreign Key)
+       [dbo].[fact_purchase_cost_supplier] (Foreign Key)
+     Create
+       [dbo].[dim_purchase] (Table)
+       [dbo].[fact_manufacture_purchase] (Foreign Key)
+       [dbo].[fact_purchase_hardware] (Foreign Key)
+       [dbo].[fact_purchase_purchase] (Foreign Key)
+       [dbo].[fact_purchase_supplier] (Foreign Key)
+
+** Supporting actions

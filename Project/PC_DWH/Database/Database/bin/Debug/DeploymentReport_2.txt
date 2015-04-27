@@ -1,0 +1,22 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [fact_2011] (File)
+       [fact_2012] (File)
+       [fact_2013] (File)
+       [fact_2014] (File)
+       [fact_2015] (File)
+       [dbo].[dim_customer] (Table)
+       [dbo].[dim_customer].[ix_dim_customer_customer_phone] (Index)
+       [dbo].[fact_sales_customer] (Foreign Key)
+
+** Supporting actions

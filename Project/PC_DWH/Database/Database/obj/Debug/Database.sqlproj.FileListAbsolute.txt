@@ -1,0 +1,5 @@
+C:\Data\SQL\Projects\PC_DWH\Project\PC_DWH\Database\Database\bin\Debug\Database.dll
+C:\Data\SQL\Projects\PC_DWH\Project\PC_DWH\Database\Database\bin\Debug\Database.pdb
+C:\Data\SQL\Projects\PC_DWH\Project\PC_DWH\Database\Database\obj\Debug\Database.dll
+C:\Data\SQL\Projects\PC_DWH\Project\PC_DWH\Database\Database\obj\Debug\Database.pdb
+C:\Data\SQL\Projects\PC_DWH\Project\PC_DWH\Database\Database\bin\Debug\pc_dwh_db.dacpac

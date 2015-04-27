@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "RS", "RS.rptproj", "{ECE9E35F-1F09-46DA-BE43-2099C0ACE5FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECE9E35F-1F09-46DA-BE43-2099C0ACE5FD}.Debug|Default.ActiveCfg = Debug
+		{ECE9E35F-1F09-46DA-BE43-2099C0ACE5FD}.Debug|Default.Build.0 = Debug
+		{ECE9E35F-1F09-46DA-BE43-2099C0ACE5FD}.Debug|Default.Deploy.0 = Debug
+		{ECE9E35F-1F09-46DA-BE43-2099C0ACE5FD}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{ECE9E35F-1F09-46DA-BE43-2099C0ACE5FD}.DebugLocal|Default.Build.0 = DebugLocal
+		{ECE9E35F-1F09-46DA-BE43-2099C0ACE5FD}.Release|Default.ActiveCfg = Release
+		{ECE9E35F-1F09-46DA-BE43-2099C0ACE5FD}.Release|Default.Build.0 = Release
+		{ECE9E35F-1F09-46DA-BE43-2099C0ACE5FD}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
