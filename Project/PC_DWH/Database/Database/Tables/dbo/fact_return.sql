@@ -7,6 +7,7 @@
 	serial_id int not null,
 	customer_id int not null,
 	gross_sales money not null,
+	CONSTRAINT [fact_return_calendar] FOREIGN KEY (day_id) REFERENCES dbo.dim_calendar(day_id),  
     CONSTRAINT [fact_returns_model] FOREIGN KEY (model_id) REFERENCES dbo.dim_model(model_id),
 	CONSTRAINT [fact_return_customer] FOREIGN KEY (customer_id) REFERENCES dbo.dim_customer(customer_id),
 	CONSTRAINT [fact_return_serial] FOREIGN KEY (serial_id) REFERENCES dbo.dim_serial(serial_id)

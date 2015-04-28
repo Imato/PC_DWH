@@ -512,28 +512,6 @@ CREATE PARTITION SCHEME [ps_id]
 
 
 GO
-PRINT N'Creating [dbo].[fact_purchase]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-CREATE TABLE [dbo].[fact_purchase] (
-    [day_id]      DATE     NOT NULL,
-    [purchase_id] INT      NOT NULL,
-    [hardware_id] INT      NOT NULL,
-    [supplier_id] SMALLINT NOT NULL,
-    [cost]        MONEY    NOT NULL
-) ON [ps_date_year] ([day_id]);
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
 PRINT N'Creating [dbo].[dim_customer]...';
 
 
@@ -726,6 +704,30 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 
 GO
+PRINT N'Creating [dbo].[dim_calendar]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+CREATE TABLE [dbo].[dim_calendar] (
+    [day_id]     DATE         NOT NULL,
+    [day_name]   VARCHAR (10) NOT NULL,
+    [month_key]  INT          NOT NULL,
+    [month_name] VARCHAR (10) NOT NULL,
+    [year_key]   SMALLINT     NOT NULL,
+    [year_name]  VARCHAR (10) NOT NULL,
+    PRIMARY KEY CLUSTERED ([day_id] ASC)
+);
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
 PRINT N'Creating [dbo].[fact_manufacture]...';
 
 
@@ -747,6 +749,63 @@ CREATE TABLE [dbo].[fact_manufacture] (
 
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+PRINT N'Creating [dbo].[fact_purchase]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+CREATE TABLE [dbo].[fact_purchase] (
+    [day_id]      DATE     NOT NULL,
+    [purchase_id] INT      NOT NULL,
+    [hardware_id] INT      NOT NULL,
+    [supplier_id] SMALLINT NOT NULL,
+    [cost]        MONEY    NOT NULL
+) ON [ps_date_year] ([day_id]);
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+PRINT N'Creating [dbo].[fact_return]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+CREATE TABLE [dbo].[fact_return] (
+    [day_id]      DATE     NOT NULL,
+    [time_id]     TIME (0) NOT NULL,
+    [receipt_id]  INT      NOT NULL,
+    [model_id]    SMALLINT NOT NULL,
+    [serial_id]   INT      NOT NULL,
+    [customer_id] INT      NOT NULL,
+    [gross_sales] MONEY    NOT NULL
+) ON [ps_date_year] ([day_id]);
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+PRINT N'Creating [dbo].[fact_return].[ix_fact_return_serial]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [ix_fact_return_serial]
+    ON [dbo].[fact_return]([serial_id] ASC, [day_id] ASC)
+    INCLUDE([gross_sales])
+    ON [ps_date_year] ([day_id]);
 
 
 GO
@@ -786,68 +845,6 @@ CREATE NONCLUSTERED INDEX [ix_fact_sales_serial]
 
 
 GO
-PRINT N'Creating [dbo].[fact_return]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-CREATE TABLE [dbo].[fact_return] (
-    [day_id]      DATE     NOT NULL,
-    [time_id]     TIME (0) NOT NULL,
-    [receipt_id]  INT      NOT NULL,
-    [model_id]    SMALLINT NOT NULL,
-    [serial_id]   INT      NOT NULL,
-    [customer_id] INT      NOT NULL,
-    [gross_sales] MONEY    NOT NULL
-) ON [ps_date_year] ([day_id]);
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-PRINT N'Creating [dbo].[fact_return].[ix_fact_return_serial]...';
-
-
-GO
-CREATE NONCLUSTERED INDEX [ix_fact_return_serial]
-    ON [dbo].[fact_return]([serial_id] ASC, [day_id] ASC)
-    INCLUDE([gross_sales])
-    ON [ps_date_year] ([day_id]);
-
-
-GO
-PRINT N'Creating [dbo].[fact_purchase_hardware]...';
-
-
-GO
-ALTER TABLE [dbo].[fact_purchase]
-    ADD CONSTRAINT [fact_purchase_hardware] FOREIGN KEY ([hardware_id]) REFERENCES [dbo].[dim_hardware] ([hardware_id]);
-
-
-GO
-PRINT N'Creating [dbo].[fact_purchase_supplier]...';
-
-
-GO
-ALTER TABLE [dbo].[fact_purchase]
-    ADD CONSTRAINT [fact_purchase_supplier] FOREIGN KEY ([supplier_id]) REFERENCES [dbo].[dim_supplier] ([supplier_id]);
-
-
-GO
-PRINT N'Creating [dbo].[fact_purchase_purchase]...';
-
-
-GO
-ALTER TABLE [dbo].[fact_purchase]
-    ADD CONSTRAINT [fact_purchase_purchase] FOREIGN KEY ([purchase_id]) REFERENCES [dbo].[dim_purchase] ([purchase_id]);
-
-
-GO
 PRINT N'Creating [dbo].[fk_hardware_supplier]...';
 
 
@@ -872,6 +869,15 @@ PRINT N'Creating [dbo].[fact_manufacture_hardware]...';
 GO
 ALTER TABLE [dbo].[fact_manufacture]
     ADD CONSTRAINT [fact_manufacture_hardware] FOREIGN KEY ([hardware_id]) REFERENCES [dbo].[dim_hardware] ([hardware_id]);
+
+
+GO
+PRINT N'Creating [dbo].[fact_manufacture_calendar]...';
+
+
+GO
+ALTER TABLE [dbo].[fact_manufacture]
+    ADD CONSTRAINT [fact_manufacture_calendar] FOREIGN KEY ([day_id]) REFERENCES [dbo].[dim_calendar] ([day_id]);
 
 
 GO
@@ -911,30 +917,48 @@ ALTER TABLE [dbo].[fact_manufacture]
 
 
 GO
-PRINT N'Creating [dbo].[fact_sales_model]...';
+PRINT N'Creating [dbo].[fact_purchase_calendar]...';
 
 
 GO
-ALTER TABLE [dbo].[fact_sales]
-    ADD CONSTRAINT [fact_sales_model] FOREIGN KEY ([model_id]) REFERENCES [dbo].[dim_model] ([model_id]);
+ALTER TABLE [dbo].[fact_purchase]
+    ADD CONSTRAINT [fact_purchase_calendar] FOREIGN KEY ([day_id]) REFERENCES [dbo].[dim_calendar] ([day_id]);
 
 
 GO
-PRINT N'Creating [dbo].[fact_sales_customer]...';
+PRINT N'Creating [dbo].[fact_purchase_hardware]...';
 
 
 GO
-ALTER TABLE [dbo].[fact_sales]
-    ADD CONSTRAINT [fact_sales_customer] FOREIGN KEY ([customer_id]) REFERENCES [dbo].[dim_customer] ([customer_id]);
+ALTER TABLE [dbo].[fact_purchase]
+    ADD CONSTRAINT [fact_purchase_hardware] FOREIGN KEY ([hardware_id]) REFERENCES [dbo].[dim_hardware] ([hardware_id]);
 
 
 GO
-PRINT N'Creating [dbo].[fact_sales_manufacture]...';
+PRINT N'Creating [dbo].[fact_purchase_supplier]...';
 
 
 GO
-ALTER TABLE [dbo].[fact_sales]
-    ADD CONSTRAINT [fact_sales_manufacture] FOREIGN KEY ([serial_id]) REFERENCES [dbo].[dim_serial] ([serial_id]);
+ALTER TABLE [dbo].[fact_purchase]
+    ADD CONSTRAINT [fact_purchase_supplier] FOREIGN KEY ([supplier_id]) REFERENCES [dbo].[dim_supplier] ([supplier_id]);
+
+
+GO
+PRINT N'Creating [dbo].[fact_purchase_purchase]...';
+
+
+GO
+ALTER TABLE [dbo].[fact_purchase]
+    ADD CONSTRAINT [fact_purchase_purchase] FOREIGN KEY ([purchase_id]) REFERENCES [dbo].[dim_purchase] ([purchase_id]);
+
+
+GO
+PRINT N'Creating [dbo].[fact_return_calendar]...';
+
+
+GO
+ALTER TABLE [dbo].[fact_return]
+    ADD CONSTRAINT [fact_return_calendar] FOREIGN KEY ([day_id]) REFERENCES [dbo].[dim_calendar] ([day_id]);
 
 
 GO
@@ -965,12 +989,39 @@ ALTER TABLE [dbo].[fact_return]
 
 
 GO
-PRINT N'Creating [dbo].[ck_fact_purchase_cost]...';
+PRINT N'Creating [dbo].[fact_sales_calendar]...';
 
 
 GO
-ALTER TABLE [dbo].[fact_purchase]
-    ADD CONSTRAINT [ck_fact_purchase_cost] CHECK (cost >= 0);
+ALTER TABLE [dbo].[fact_sales]
+    ADD CONSTRAINT [fact_sales_calendar] FOREIGN KEY ([day_id]) REFERENCES [dbo].[dim_calendar] ([day_id]);
+
+
+GO
+PRINT N'Creating [dbo].[fact_sales_model]...';
+
+
+GO
+ALTER TABLE [dbo].[fact_sales]
+    ADD CONSTRAINT [fact_sales_model] FOREIGN KEY ([model_id]) REFERENCES [dbo].[dim_model] ([model_id]);
+
+
+GO
+PRINT N'Creating [dbo].[fact_sales_customer]...';
+
+
+GO
+ALTER TABLE [dbo].[fact_sales]
+    ADD CONSTRAINT [fact_sales_customer] FOREIGN KEY ([customer_id]) REFERENCES [dbo].[dim_customer] ([customer_id]);
+
+
+GO
+PRINT N'Creating [dbo].[fact_sales_manufacture]...';
+
+
+GO
+ALTER TABLE [dbo].[fact_sales]
+    ADD CONSTRAINT [fact_sales_manufacture] FOREIGN KEY ([serial_id]) REFERENCES [dbo].[dim_serial] ([serial_id]);
 
 
 GO
@@ -980,6 +1031,15 @@ PRINT N'Creating [dbo].[fact_manufacture_cost]...';
 GO
 ALTER TABLE [dbo].[fact_manufacture]
     ADD CONSTRAINT [fact_manufacture_cost] CHECK (cost >= 0);
+
+
+GO
+PRINT N'Creating [dbo].[ck_fact_purchase_cost]...';
+
+
+GO
+ALTER TABLE [dbo].[fact_purchase]
+    ADD CONSTRAINT [ck_fact_purchase_cost] CHECK (cost >= 0);
 
 
 GO
@@ -1047,6 +1107,57 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 
 GO
+PRINT N'Creating [rs].[dim_supplier]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+create view [rs].[dim_supplier]
+as
+select supplier_id, supplier_name, country_name, region_name
+from [dbo].[dim_supplier]
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+PRINT N'Creating [rs].[dim_model]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+create view [rs].[dim_model]
+as
+select model_id, model_name, model_barcode, create_date
+from [dbo].[dim_model]
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+PRINT N'Creating [rs].[dim_customer]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+create view [rs].[dim_customer]
+as
+select customer_id, customer_name, customer_phone
+from [dbo].[dim_customer]
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
 PRINT N'Creating [rs].[fact_sales]...';
 
 
@@ -1059,6 +1170,40 @@ create view [rs].[fact_sales]
 as
 select day_id, time_id, receipt_id, model_id, serial_id, customer_id, cost, gross_sales
 from [dbo].[fact_sales]
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+PRINT N'Creating [rs].[fact_purchase]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+create view [rs].[fact_purchase]
+as
+select day_id, purchase_id, hardware_id, supplier_id, cost
+from [dbo].[fact_purchase]
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+PRINT N'Creating [rs].[dim_calendar]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+create view [rs].[dim_calendar]
+as
+select day_id, day_name, month_key, month_name, year_key, year_name
+from [dbo].[dim_calendar]
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 

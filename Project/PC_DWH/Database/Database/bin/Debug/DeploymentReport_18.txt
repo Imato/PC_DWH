@@ -1,0 +1,25 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[dim_calendar] (Table)
+       [dbo].[fact_manufacture_calendar] (Foreign Key)
+       [dbo].[fact_purchase_calendar] (Foreign Key)
+       [dbo].[fact_return_calendar] (Foreign Key)
+       [dbo].[fact_sales_calendar] (Foreign Key)
+       [rs].[dim_customer] (View)
+       [rs].[dim_model] (View)
+       [rs].[dim_supplier] (View)
+       [rs].[fact_purchase] (View)
+     Alter
+       [rs].[prc_r_001] (Procedure)
+
+** Supporting actions

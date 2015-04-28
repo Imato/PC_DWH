@@ -8,6 +8,7 @@
 	supplier_id smallint not null,
 	cost money not null, 
     CONSTRAINT [fact_manufacture_hardware] FOREIGN KEY (hardware_id) REFERENCES dbo.dim_hardware(hardware_id), 
+	CONSTRAINT [fact_manufacture_calendar] FOREIGN KEY (day_id) REFERENCES dbo.dim_calendar(day_id), 
     CONSTRAINT [fact_manufacture_supplier] FOREIGN KEY (supplier_id) REFERENCES dbo.dim_supplier(supplier_id), 
     CONSTRAINT [fact_manufacture_cost] CHECK (cost >= 0), 
     CONSTRAINT [fk_fact_manufacture_model] FOREIGN KEY (model_id) REFERENCES dbo.dim_model(model_id),

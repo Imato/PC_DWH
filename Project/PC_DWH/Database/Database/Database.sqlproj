@@ -143,6 +143,12 @@
     <Build Include="Procedures\rs\prc_r_001.sql" />
     <Build Include="Storage\ps_id.sql" />
     <Build Include="Tables\dbo\dim_serial.sql" />
+    <Build Include="Views\rs\dim_supplier.sql" />
+    <Build Include="Views\rs\dim_model.sql" />
+    <Build Include="Views\rs\dim_customer.sql" />
+    <Build Include="Views\rs\fact_purchase.sql" />
+    <Build Include="Tables\dbo\dim_calendar.sql" />
+    <Build Include="Views\rs\dim_calendar.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\dbo\fact_manufacture.sql" />
